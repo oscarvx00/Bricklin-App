@@ -22,8 +22,12 @@ namespace Bricklin_App.model
             SortedDictionary<double, double> sd = new SortedDictionary<double, double>();
 
             for (int i = 1; i < 30; i++)
-                sd.Add((double)i, (double)i + 1);
-
+            {
+                if (i != 15)
+                    sd.Add((double)i, (double)i + 1);
+                else
+                    sd.Add((double)i, 40);
+            }
             dataset = new Dataset(sd);
             polylineConf = new PolylineConf();
             barConf = new BarConf();
