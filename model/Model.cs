@@ -9,7 +9,7 @@ namespace Bricklin_App.model
 {
     class Model
     {
-        static Model instance = null;
+        private static Model instance = null;
 
         Dataset dataset;
 
@@ -18,7 +18,13 @@ namespace Bricklin_App.model
 
         private Model()
         {
-            dataset = null;
+
+            SortedDictionary<double, double> sd = new SortedDictionary<double, double>();
+
+            for (int i = 1; i < 30; i++)
+                sd.Add((double)i, (double)i + 1);
+
+            dataset = new Dataset(sd);
             polylineConf = new PolylineConf();
             barConf = new BarConf();
         }

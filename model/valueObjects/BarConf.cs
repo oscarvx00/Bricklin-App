@@ -23,9 +23,14 @@ namespace Bricklin_App.model
             foreground = color;
         }
 
-        public Color getForeground()
+        public Color getForegroundColor()
         {
             return foreground;
+        }
+
+        public SolidColorBrush getForegroundBrush()
+        {
+            return new SolidColorBrush(foreground);
         }
 
         public void setBackground(Color color)
@@ -33,9 +38,14 @@ namespace Bricklin_App.model
             background = color;
         }
 
-        public Color getBackground()
+        public Color getBackgroundColor()
         {
             return background;
+        }
+
+        public SolidColorBrush getBackgroundBrush()
+        {
+            return new SolidColorBrush(background);
         }
 
     }
