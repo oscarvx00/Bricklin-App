@@ -53,14 +53,16 @@
                 <TabItem Name="polylineTabItem" Header="Polilinea">
                     <Grid>
                         <Canvas Background="Cyan"
-                                Name="polylineCanvas"/>
+                                Name="polylineCanvas"
+                                ClipToBounds="True"/>
                     </Grid>
 
                 </TabItem>
                 <TabItem Name="barTabItem" Header="Barras">
                     <Grid>
                         <Canvas Background="Green"
-                                Name="barCanvas"/>
+                                Name="barCanvas"
+                                ClipToBounds="True"/>
                     </Grid>
                 </TabItem>
             </TabControl>
