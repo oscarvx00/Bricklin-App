@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using ControlzEx.Theming;
+using Bricklin_App.model;
 
 namespace Bricklin_App
 {
@@ -28,6 +29,11 @@ namespace Bricklin_App
 
             ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
             ThemeManager.Current.SyncTheme();
+
+            
+            polylineCanvas.Background = Model.getInstance().getPolylineConf().getBackgroundBrush();
+            barCanvas.Background = Model.getInstance().getBarConf().getBackgroundBrush();
+
 
             //ThemeManager.Current.ChangeTheme(this, "Light.Red");
         }
