@@ -28,6 +28,32 @@ namespace Bricklin_App
 
             ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
             ThemeManager.Current.SyncTheme();
+
+            //ThemeManager.Current.ChangeTheme(this, "Light.Red");
         }
+
+        private void editDataClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string tabItem = ((sender as TabControl).SelectedItem as TabItem).Header as string;
+
+            switch (tabItem)
+            {
+                case "Polilinea":
+                    //Polyline chart stuff
+                    break;
+                case "Barras":
+                    //Bar chart stuff
+                    break;
+                default:
+                    //Mostrar error
+                    break;
+            }
+        }
+
     }
 }
