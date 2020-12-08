@@ -26,7 +26,7 @@ namespace Bricklin_App.model
                 if (i != 15)
                     sd.Add((double)i, (double)i + 1);
                 else
-                    sd.Add((double)i, 40);
+                    sd.Add((double)i, 20);
             }
             dataset = new Dataset(sd);
             polylineConf = new PolylineConf();
