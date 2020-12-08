@@ -11,7 +11,7 @@ namespace Bricklin_App.model
     {
 
         Color foreground = Colors.Red;
-        Color background = Colors.Gray;
+        Color background = Colors.Green;
 
         public BarConf()
         {

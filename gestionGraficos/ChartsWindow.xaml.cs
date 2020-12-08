@@ -27,7 +27,12 @@ namespace Bricklin_App
         Polyline polyline;
 
         SortedDictionary<double, double> actualPolylineData = null;
+
         SortedDictionary<double, double> actualBarData = null;
+
+        bool polylineIsDragging = false, barIsDragging = false;
+        Point polylineAnchorPoint = new Point();
+        Point barAnchorPoint = new Point();
 
         public MainWindow()
         {
@@ -61,6 +66,17 @@ namespace Bricklin_App
             
         }
 
+        private void resetChartButton_Click(object sender, RoutedEventArgs e)
+        {
+            actualPolylineData = Model.getInstance().getDataset().getData();
+            createPolylineChart();
+
+            actualBarData = Model.getInstance().getDataset().getData();
+            createBarChart();
+
+            resetChartButton.Visibility = Visibility.Collapsed;
+        }
+
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string tabItem = ((sender as TabControl).SelectedItem as TabItem).Header as string;
@@ -73,12 +89,14 @@ namespace Bricklin_App
                     break;
                 case "Barras":
                     actualBarData = Model.getInstance().getDataset().getData();
-                    createBarChart();
+                    createBarChart();                   
                     break;
                 default:
                     //Mostrar error
                     break;
             }
+
+            resetChartButton.Visibility = Visibility.Collapsed;
         }
 
         private void createPolylineChart()
@@ -128,6 +146,66 @@ namespace Bricklin_App
                 polyline.Points.Add(pt);
             }
 
+        }
+
+        private void createPolylineChart(Point a , Point b)
+        {
+
+            double padding = 10;
+
+            SortedDictionary<double, double> data = actualPolylineData;
+
+            if (data == null)
+                return;
+
+            int numPuntos = (int)polylineCanvas.ActualWidth;
+            double xReal, yReal, xRealMax, xRealMin, yRealMax, yRealMin;
+
+            xRealMax = data.Keys.Max();
+            xRealMin = data.Keys.Min();
+            yRealMax = data.Values.Max();
+            yRealMin = data.Values.Min();
+
+            double xPant, yPant, xPantMin, xPantMax, yPantMin, yPantMax;
+
+
+            xPantMin = 0;
+            xPantMax = polylineCanvas.ActualWidth;
+            yPantMin = 0;
+            yPantMax = polylineCanvas.ActualHeight;
+            /*
+            xPantMin = padding;
+            xPantMax = polylineCanvas.ActualWidth - padding;
+            yPantMin = padding;
+            yPantMax = polylineCanvas.ActualHeight - padding;*/
+
+            polyline.Points.Clear();
+
+            SortedDictionary<double, double> newPolylineData = new SortedDictionary<double, double>();
+            double xMouseMin = Math.Min(a.X, b.X), xMouseMax = Math.Max(a.X, b.X);
+            double yMouseMin = Math.Min(a.Y, b.Y), yMouseMax = Math.Max(a.Y, b.Y);
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                xReal = data.ElementAt(i).Key;
+                yReal = data.ElementAt(i).Value;
+
+                xPant = (xPantMax - xPantMin) * (xReal - xRealMin) / (xRealMax - xRealMin) + xPantMin;
+                yPant = (yPantMin - yPantMax) * (yReal - yRealMin) / (yRealMax - yRealMin) + yPantMax;
+
+                if((xMouseMin <= xPant && xMouseMax >= xPant) && (yMouseMin <= yPant && yMouseMax >= yPant))
+                {
+                    newPolylineData.Add(xReal, yReal);
+                    //Point pt = new Point(xPant, yPant);
+                    //polyline.Points.Add(pt);
+                }    
+            }
+
+            actualPolylineData = newPolylineData;
+
+            createPolylineChart();
+
+            resetChartButton.Visibility = Visibility.Visible;
         }
 
         private void createBarChart()
@@ -198,10 +276,150 @@ namespace Bricklin_App
 
         }
 
+        private void createBarChart(Point a, Point b)
+        {
+
+            SortedDictionary<double, double> data = actualBarData;
+
+            if (data == null)
+                return;
+
+            int numPuntos = (int)barCanvas.ActualWidth;
+
+
+            double xReal, yReal, xRealMax, xRealMin, yRealMax, yRealMin;
+
+            /*
+             * los valores y max y min se deben añadir a la clase Dataset
+             * */
+            xRealMax = data.Keys.Max();
+            xRealMin = data.Keys.Min();
+            yRealMax = data.Values.Max();
+            yRealMin = data.Values.Min();
+
+            double xPant, yPant, xPantMin, xPantMax, yPantMin, yPantMax;
+
+
+            xPantMin = 0;
+            xPantMax = barCanvas.ActualWidth;
+            yPantMin = 0;
+            yPantMax = barCanvas.ActualHeight;
+
+            int pointsRange = numPuntos / data.Count;
+
+            List<Line> lineList = new List<Line>();
+
+            double ypantallaEjeX = (yPantMin - yPantMax) * (0 - yRealMin) / (yRealMax - yRealMin) + yPantMax;
+
+            SortedDictionary<double, double> newBarData = new SortedDictionary<double, double>();
+            double xMouseMin = Math.Min(a.X, b.X), xMouseMax = Math.Max(a.X, b.X);
+            double yMouseMin = Math.Min(a.Y, b.Y), yMouseMax = Math.Max(a.Y, b.Y);
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                //xReal = xRealMin + (i*pointsRange) * (xRealMax - xRealMin) / numPuntos;
+                xReal = data.ElementAt(i).Key;
+                yReal = data.ElementAt(i).Value;
+
+                xPant = (xPantMax - xPantMin) * (xReal - xRealMin) / (xRealMax - xRealMin) + xPantMin;
+                yPant = (yPantMin - yPantMax) * (yReal - yRealMin) / (yRealMax - yRealMin) + yPantMax;
+
+
+                if ((xMouseMin <= xPant && xMouseMax >= xPant) && (yMouseMin <= yPant && yMouseMax >= yPant))
+                {
+                    newBarData.Add(xReal, yReal);
+                }
+            }
+
+            actualBarData = newBarData;
+
+            createBarChart();
+
+            resetChartButton.Visibility = Visibility.Visible;
+
+        }
+
         private void MetroWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             createPolylineChart();
             createBarChart();
+        }
+
+        private void polylineCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            polylineAnchorPoint.X = e.GetPosition(polylineCanvas).X;
+            polylineAnchorPoint.Y = e.GetPosition(polylineCanvas).Y;
+            polylineIsDragging = true;
+        }
+
+        private void polylineCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            polylineCanvasSelectionRectangle.Visibility = Visibility.Collapsed;
+            polylineIsDragging = false;
+
+            Point endPoint = new Point(e.GetPosition(polylineCanvas).X, e.GetPosition(polylineCanvas).Y);
+
+            createPolylineChart(polylineAnchorPoint, endPoint);
+
+        }
+
+        private void polylineCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (polylineIsDragging)
+            {
+                double x = e.GetPosition(polylineCanvas).X;
+                double y = e.GetPosition(polylineCanvas).Y;
+
+                //Get lowest value to determine top.left
+                polylineCanvasSelectionRectangle.SetValue(Canvas.LeftProperty, Math.Min(x, polylineAnchorPoint.X));
+                polylineCanvasSelectionRectangle.SetValue(Canvas.TopProperty, Math.Min(y, polylineAnchorPoint.Y));
+
+                //get width/height
+                polylineCanvasSelectionRectangle.Width = Math.Abs(x - polylineAnchorPoint.X);
+                polylineCanvasSelectionRectangle.Height = Math.Abs(y - polylineAnchorPoint.Y);
+
+                //toggle visibility
+                if (polylineCanvasSelectionRectangle.Visibility != Visibility.Visible)
+                    polylineCanvasSelectionRectangle.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void barCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            barAnchorPoint.X = e.GetPosition(barCanvas).X;
+            barAnchorPoint.Y = e.GetPosition(barCanvas).Y;
+            barIsDragging = true;
+        }
+
+        private void barCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            barCanvasSelectionRectangle.Visibility = Visibility.Collapsed;
+            barIsDragging = false;
+
+            Point endPoint = new Point(e.GetPosition(barCanvas).X, e.GetPosition(barCanvas).Y);
+
+            createBarChart(barAnchorPoint, endPoint);
+        }
+
+        private void barCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (barIsDragging)
+            {
+                double x = e.GetPosition(barCanvas).X;
+                double y = e.GetPosition(barCanvas).Y;
+
+                //Get lowest value to determine top.left
+                barCanvasSelectionRectangle.SetValue(Canvas.LeftProperty, Math.Min(x, barAnchorPoint.X));
+                barCanvasSelectionRectangle.SetValue(Canvas.TopProperty, Math.Min(y, barAnchorPoint.Y));
+
+                //get width/height
+                barCanvasSelectionRectangle.Width = Math.Abs(x - barAnchorPoint.X);
+                barCanvasSelectionRectangle.Height = Math.Abs(y - barAnchorPoint.Y);
+
+                //toggle visibility
+                if (barCanvasSelectionRectangle.Visibility != Visibility.Visible)
+                    barCanvasSelectionRectangle.Visibility = Visibility.Visible;
+            }
         }
     }
 }
