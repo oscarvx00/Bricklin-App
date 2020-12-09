@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using ControlzEx.Theming;
 using Bricklin_App.model;
+using Bricklin_App.gestionTabla;
 
 namespace Bricklin_App
 {
@@ -63,7 +64,17 @@ namespace Bricklin_App
 
         private void editDataClicked(object sender, RoutedEventArgs e)
         {
-            
+            TableDialog tableDialog = new TableDialog();
+            tableDialog.ShowDialog();
+
+            if(tableDialog.DialogResult == true)
+            {
+                actualPolylineData = Model.getInstance().getDataset().getData();
+                actualBarData = Model.getInstance().getDataset().getData();
+
+                createPolylineChart();
+                createBarChart();
+            }
         }
 
         private void resetChartButton_Click(object sender, RoutedEventArgs e)
@@ -102,7 +113,7 @@ namespace Bricklin_App
         private void createPolylineChart()
         {
 
-            double padding = 10;
+            //double padding = 10;
 
             SortedDictionary<double, double> data = actualPolylineData;
 
@@ -151,7 +162,7 @@ namespace Bricklin_App
         private void createPolylineChart(Point a , Point b)
         {
 
-            double padding = 10;
+            //double padding = 10;
 
             SortedDictionary<double, double> data = actualPolylineData;
 

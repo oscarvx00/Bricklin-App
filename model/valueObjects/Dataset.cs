@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bricklin_App.model
 {
-    class Dataset
+     public class Dataset
     {
         SortedDictionary<double, double> data = null;
         double yMin = 0, yMax = 0;

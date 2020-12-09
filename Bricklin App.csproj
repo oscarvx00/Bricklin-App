@@ -62,6 +62,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>packages\ControlzEx.4.4.0\lib\net462\ControlzEx.dll</HintPath>
@@ -78,6 +81,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -108,8 +112,22 @@
       <DependentUpon>ChartsWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="gestionTabla\DataGenerationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gestionTabla\TableDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="gestionTabla\DataGenerationDialog.xaml.cs">
+      <DependentUpon>DataGenerationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gestionTabla\TableDialog.xaml.cs">
+      <DependentUpon>TableDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="model\valueObjects\BarConf.cs" />
     <Compile Include="model\valueObjects\Dataset.cs" />
     <Compile Include="model\Model.cs" />
@@ -152,6 +170,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
