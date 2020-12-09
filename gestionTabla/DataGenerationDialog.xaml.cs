@@ -31,8 +31,6 @@ namespace Bricklin_App.gestionTabla
         {
             InitializeComponent();
 
-            ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
-            ThemeManager.Current.SyncTheme();
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

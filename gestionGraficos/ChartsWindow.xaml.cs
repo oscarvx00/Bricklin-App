@@ -16,6 +16,7 @@ using MahApps.Metro.Controls;
 using ControlzEx.Theming;
 using Bricklin_App.model;
 using Bricklin_App.gestionTabla;
+using Bricklin_App.gestionVisualizacion;
 
 namespace Bricklin_App
 {
@@ -282,9 +283,6 @@ namespace Bricklin_App
             {
                 barCanvas.Children.Add(l);
             }
-
-
-
         }
 
         private void createBarChart(Point a, Point b)
@@ -410,6 +408,12 @@ namespace Bricklin_App
             Point endPoint = new Point(e.GetPosition(barCanvas).X, e.GetPosition(barCanvas).Y);
 
             createBarChart(barAnchorPoint, endPoint);
+        }
+
+        private void themeClicked(object sender, RoutedEventArgs e)
+        {
+            ThemeDialog themeDialog = new ThemeDialog();
+            themeDialog.ShowDialog();
         }
 
         private void barCanvas_MouseMove(object sender, MouseEventArgs e)

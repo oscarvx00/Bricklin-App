@@ -17,7 +17,7 @@
                 <MenuItem Header="_Save"/>
             </MenuItem>
             <MenuItem Header="_Tema">
-                <MenuItem Header="_Cambiar tema"/>
+                <MenuItem Header="_Cambiar tema" Click="themeClicked"/>
                 <MenuItem Header="_Sincronizar tema con Windows"/>
             </MenuItem>
         </Menu>

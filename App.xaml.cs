@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using MahApps.Metro.Controls;
 using ControlzEx.Theming;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Bricklin_App
 {
@@ -23,6 +24,11 @@ namespace Bricklin_App
             // Set the application theme to Dark.Green
             //ThemeManager.Current.ChangeTheme(this, "Light.Blue");
 
+        }
+
+        public void changeTheme(string theme, string color)
+        {
+            ThemeManager.Current.ChangeTheme(this, theme + "." + color);
         }
     }
 

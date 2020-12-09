@@ -33,9 +33,6 @@ namespace Bricklin_App.gestionTabla
         {
             InitializeComponent();
 
-            ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
-            ThemeManager.Current.SyncTheme();
-
             SortedDictionary<double, double> data = Model.getInstance().getDataset().getData();
 
             putTableData(data);
@@ -127,7 +124,14 @@ namespace Bricklin_App.gestionTabla
 
             foreach(CustomPoint c in oc)
             {
-                sd.Add(c.X, c.Y);
+                try
+                {
+                    sd.Add(c.X, c.Y);
+                }
+                catch (ArgumentException)
+                {
+                    
+                }
             }
 
             return new Dataset(sd);
