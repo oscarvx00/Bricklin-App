@@ -1,0 +1,61 @@
+﻿<mah:MetroWindow x:Class="Bricklin_App.gestionTabla.DataGenerationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:Bricklin_App.gestionTabla"
+        mc:Ignorable="d"
+        Title="DataGenerationDialog" Height="300" Width="500"
+                 ResizeMode="NoResize">
+    <DockPanel LastChildFill="False">
+        <TextBlock Text="Rango"
+                   DockPanel.Dock="Top"
+                   HorizontalAlignment="Center"
+                   Margin="0 10 0 0"/>
+
+        <DockPanel DockPanel.Dock="Top" LastChildFill="False"
+                   Margin="130 20">
+            <TextBox mah:TextBoxHelper.Watermark="Min"
+                     mah:TextBoxHelper.ClearTextButton="True"
+                     Width="80"
+                     DockPanel.Dock="Left"
+                     Name="rangeMinTB"/>
+            <TextBox mah:TextBoxHelper.Watermark="Max"
+                     mah:TextBoxHelper.ClearTextButton="True"
+                     Width="80"
+                     DockPanel.Dock="Right"
+                     Name="rangeMaxTB"/>
+
+        </DockPanel>
+        <TextBlock Text="Expresion Polinomica"
+                   DockPanel.Dock="Top"
+                   HorizontalAlignment="Center"
+                   Margin="0 10 0 0"/>
+        <TextBlock Text="Patron: (a#bx#cx#dx...)"
+                   DockPanel.Dock="Top"
+                   HorizontalAlignment="Center"
+                   Margin="0 5 0 0"
+                   FontSize="10"/>
+        <TextBox mah:TextBoxHelper.Watermark="Polinomio"
+                     mah:TextBoxHelper.ClearTextButton="True"
+                     Width="200"
+                    Margin="0 10 0 0"
+                 Name="polynomialTB"
+                     DockPanel.Dock="Top"/>
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" Margin="20">
+            <Button Name="cancelButton"
+                        Width="80"
+                        Height="30"
+                        DockPanel.Dock="Left"
+                        Click="cancelButton_Click">Cancelar</Button>
+
+            <Button Name="saveButton"
+                        Width="80"
+                        Height="30"
+                        DockPanel.Dock="Right"
+                    Click="saveButton_Click">Guardar</Button>
+
+        </DockPanel>
+    </DockPanel>
+</mah:MetroWindow>

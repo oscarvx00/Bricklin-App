@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace Bricklin_App.model
 {
-    class PolylineConf
+    public class PolylineConf
     {
 
         Color foreground = Colors.Red;

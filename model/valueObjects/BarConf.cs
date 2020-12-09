@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace Bricklin_App.model
 {
-    class BarConf
+    public class BarConf
     {
 
         Color foreground = Colors.Red;
