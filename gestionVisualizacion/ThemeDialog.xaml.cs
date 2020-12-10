@@ -1,19 +1,10 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ControlzEx.Theming;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace Bricklin_App.gestionVisualizacion
 {
@@ -23,14 +14,13 @@ namespace Bricklin_App.gestionVisualizacion
     public partial class ThemeDialog : MetroWindow
     {
 
-        string theme=null, color=null;
+        string theme = null, color = null;
 
         public ThemeDialog()
         {
             InitializeComponent();
 
         }
-
 
         private void setAllColorsUnselected()
         {
@@ -92,7 +82,7 @@ namespace Bricklin_App.gestionVisualizacion
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            if(theme!= null && color!= null)
+            if (theme != null && color != null)
             {
                 ((App)Application.Current).changeTheme(theme, color);
                 DialogResult = true;
@@ -106,6 +96,5 @@ namespace Bricklin_App.gestionVisualizacion
         {
             await this.ShowMessageAsync("Error", msg);
         }
-
     }
 }

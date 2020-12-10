@@ -10,8 +10,8 @@ namespace Bricklin_App.model
     public class BarConf
     {
 
-        Color foreground = Colors.Red;
-        Color background = Colors.Green;
+        Color foreground = Colors.Blue;
+        Color background = Colors.Gray;
 
         public BarConf()
         {

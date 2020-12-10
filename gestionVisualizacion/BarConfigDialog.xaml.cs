@@ -1,19 +1,8 @@
 ﻿using Bricklin_App.model;
 using Dsafa.WpfColorPicker;
 using MahApps.Metro.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Bricklin_App.gestionVisualizacion
 {
@@ -32,8 +21,6 @@ namespace Bricklin_App.gestionVisualizacion
             foregroundRectangle.Fill = barConf.getForegroundBrush();
             backgroundRectangle.Fill = barConf.getBackgroundBrush();
         }
-
- 
 
         private void selectForegroundBT_Click(object sender, RoutedEventArgs e)
         {
@@ -56,7 +43,7 @@ namespace Bricklin_App.gestionVisualizacion
             var dialog = new ColorPickerDialog(initialColor);
             var result = dialog.ShowDialog();
 
-            if(result.HasValue && result.Value)
+            if (result.HasValue && result.Value)
             {
                 return dialog.Color;
             }

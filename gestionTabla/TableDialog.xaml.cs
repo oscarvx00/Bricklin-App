@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using Bricklin_App.model;
 using MahApps.Metro.Controls;
-using ControlzEx.Theming;
-using System.Data.SqlTypes;
-using Bricklin_App.model;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
 using MahApps.Metro.Controls.Dialogs;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
 
 namespace Bricklin_App.gestionTabla
 {
@@ -26,7 +14,6 @@ namespace Bricklin_App.gestionTabla
     /// </summary>
     public partial class TableDialog : MetroWindow
     {
-
         ObservableCollection<CustomPoint> oc { get; set; }
 
         public TableDialog()
@@ -36,8 +23,6 @@ namespace Bricklin_App.gestionTabla
             SortedDictionary<double, double> data = Model.getInstance().getDataset().getData();
 
             putTableData(data);
-
-            
         }
 
         private void putTableData(SortedDictionary<double, double> sd)
@@ -60,9 +45,9 @@ namespace Bricklin_App.gestionTabla
         private void addRowsAtBottomButton_Click(object sender, RoutedEventArgs e)
         {
             const int NUM_ROWS = 10;
-            for(int i = 0; i < NUM_ROWS; i++)
+            for (int i = 0; i < NUM_ROWS; i++)
             {
-                oc.Insert(oc.Count , new CustomPoint(0, 0));
+                oc.Insert(oc.Count, new CustomPoint(0, 0));
             }
         }
 
@@ -119,7 +104,7 @@ namespace Bricklin_App.gestionTabla
                     DialogResult = true;
                 }
             }
-                
+
         }
 
         private Dataset generateDataset()
@@ -128,13 +113,13 @@ namespace Bricklin_App.gestionTabla
 
             bool foundRepeatedPoints = false;
 
-            foreach(CustomPoint c in oc)
+            foreach (CustomPoint c in oc)
             {
                 try
                 {
                     sd.Add(c.X, c.Y);
                 }
-                catch (ArgumentException ex)
+                catch (ArgumentException)
                 {
                     foundRepeatedPoints = true;
                     break;
@@ -160,7 +145,7 @@ namespace Bricklin_App.gestionTabla
             DataGenerationDialog dataGenerationDialog = new DataGenerationDialog();
             dataGenerationDialog.ShowDialog();
 
-            if(dataGenerationDialog.DialogResult == true)
+            if (dataGenerationDialog.DialogResult == true)
             {
                 putTableData(dataGenerationDialog.GeneratedDataset.getData());
             }

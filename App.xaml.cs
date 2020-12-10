@@ -16,28 +16,9 @@ namespace Bricklin_App
     /// </summary>
     public partial class App : Application
     {
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-
-            // Set the application theme to Dark.Green
-            //ThemeManager.Current.ChangeTheme(this, "Light.Blue");
-
-        }
-
         public void changeTheme(string theme, string color)
         {
             ThemeManager.Current.ChangeTheme(this, theme + "." + color);
         }
-
-
-        /*public void setSystemTheme()
-        {
-            ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
-            ThemeManager.Current.SyncTheme();
-        }*/
     }
-
-
 }

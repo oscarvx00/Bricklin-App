@@ -11,14 +11,13 @@
                  SizeChanged="MetroWindow_SizeChanged">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
+            <!--<MenuItem Header="_File">
                 <MenuItem Header="_Open"/>
                 <MenuItem Header="_Close"/>
                 <MenuItem Header="_Save"/>
-            </MenuItem>
+            </MenuItem>-->
             <MenuItem Header="_Tema">
                 <MenuItem Header="_Cambiar tema" Click="themeClicked"/>
-                <!--<MenuItem Header="_Sincronizar tema con Windows" Click="syncThemeClicked"/>-->
             </MenuItem>
             <MenuItem Header="_Personalización">
                 <MenuItem Header="Pesonalización polilinea" Click="configPolylineClicked"/>
@@ -63,7 +62,7 @@
             <TabControl SelectionChanged="TabControl_SelectionChanged"
                         Margin="10">
                 <TabItem Name="polylineTabItem" Header="Polilinea">
-                    <Canvas Background="Cyan"
+                    <Canvas Background="Gray"
                             Name="polylineCanvas"
                             ClipToBounds="True"
                             MouseLeftButtonDown="polylineCanvas_MouseLeftButtonDown"
@@ -74,23 +73,19 @@
                                     Stroke="White"
                                     Visibility="Collapsed"
                                     Fill="#77FFFFFF"/>
-
                     </Canvas>
-
                 </TabItem>
                 <TabItem Name="barTabItem" Header="Barras">
-                    <Canvas Background="Green"
+                    <Canvas Background="Gray"
                             Name="barCanvas"
                             ClipToBounds="True"
                             MouseLeftButtonDown="barCanvas_MouseLeftButtonDown"
                             MouseLeftButtonUp="barCanvas_MouseLeftButtonUp"
                             MouseMove="barCanvas_MouseMove">
-
                         <Rectangle Name="barCanvasSelectionRectangle"
                                     Stroke="White"
                                     Visibility="Collapsed"
                                     Fill="#77FFFFFF"/>
-
                     </Canvas>
                 </TabItem>
             </TabControl>

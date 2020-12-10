@@ -10,7 +10,7 @@ namespace Bricklin_App.model
     public class PolylineConf
     {
 
-        Color foreground = Colors.Red;
+        Color foreground = Colors.Blue;
         Color background = Colors.Gray;
         int stroke = 2;
 

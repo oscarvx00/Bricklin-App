@@ -30,7 +30,6 @@ namespace Bricklin_App.gestionTabla
         public DataGenerationDialog()
         {
             InitializeComponent();
-
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
@@ -52,9 +51,6 @@ namespace Bricklin_App.gestionTabla
             {
                 createDataset();
             }
-
-
-
         }
 
         private void createDataset()

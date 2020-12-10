@@ -1,20 +1,10 @@
 ﻿using Bricklin_App.model;
-using MahApps.Metro.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Dsafa.WpfColorPicker;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using System;
+using System.Windows;
+using System.Windows.Media;
 
 namespace Bricklin_App.gestionVisualizacion
 {
@@ -73,7 +63,8 @@ namespace Bricklin_App.gestionVisualizacion
         private bool getStrokeTB()
         {
             int val;
-            if(!int.TryParse(strokeTB.Text, out val)){
+            if (!int.TryParse(strokeTB.Text, out val))
+            {
                 return false;
             }
             if (val < 1 || val > 15)
