@@ -1,0 +1,96 @@
+﻿<mah:MetroWindow x:Class="Bricklin_App.gestionVisualizacion.PolylineConfDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:Bricklin_App.gestionVisualizacion"
+        mc:Ignorable="d"
+        Title="PolylineConfDialog" Height="350" Width="600"
+                 ResizeMode="NoResize">
+    <StackPanel>
+        <Border BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+                DockPanel.Dock="Top"
+                BorderThickness="2"
+                Margin="5"
+                Height="auto">
+            <DockPanel LastChildFill="False">
+                <TextBlock
+                    DockPanel.Dock="Top"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="20"
+                    Text="Personalización grafico de barras"
+                    Height="auto"
+                    Width="auto"
+                    FontSize="18"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}"/>
+            </DockPanel>
+        </Border>
+        <DockPanel LastChildFill="False" Width="320" Margin="0 30 0 0">
+            <TextBlock DockPanel.Dock="Left"
+                       Text="Color de frente"
+                       VerticalAlignment="Center"
+                       FontSize="13"/>
+            <Rectangle Width="20" Height="20"
+                       Stroke="Gray" StrokeThickness="2"
+                       DockPanel.Dock="Left"
+                       Margin="60 0 0 0"
+                       VerticalAlignment="Center"
+                       Name="foregroundRectangle"/>
+            <Button Width="120"
+                    Height="20"
+                    DockPanel.Dock="Right"
+                    VerticalAlignment="Center"
+                    Name="selectForegroundBT"
+                    Click="selectForegroundBT_Click">Seleccionar color</Button>
+        </DockPanel>
+        <DockPanel LastChildFill="False" Width="320" Margin="0 20 0 0">
+            <TextBlock DockPanel.Dock="Left"
+                       Text="Color de fondo"
+                       VerticalAlignment="Center"
+                       FontSize="13"/>
+            <Rectangle Width="20" Height="20"
+                       Stroke="Gray" StrokeThickness="2"
+                       DockPanel.Dock="Left"
+                       Margin="60 0 0 0"
+                       VerticalAlignment="Center"
+                       Name="backgroundRectangle"/>
+            <Button Width="120"
+                    Height="20"
+                    DockPanel.Dock="Right"
+                    VerticalAlignment="Center"
+                    Name="selectBackgroundBT"
+                    Click="selectBackgroundBT_Click">Seleccionar color</Button>
+        </DockPanel>
+        
+        <DockPanel LastChildFill="False" Width="320" Margin="0 20 0 0">
+            <TextBlock DockPanel.Dock="Left"
+                       Text="Ancho (1-15)"
+                       VerticalAlignment="Center"
+                       FontSize="13"/>
+            <TextBox mah:TextBoxHelper.Watermark="Valor"
+                     mah:TextBoxHelper.ClearTextButton="True"
+                     Width="180"
+                     DockPanel.Dock="Right"
+                     Name="strokeTB"/>
+
+        </DockPanel>
+
+        <DockPanel
+                   LastChildFill="False"
+                   Width="500"
+                   Margin="0 50 0 0">
+            <Button Name="cancelButton"
+                        Width="80"
+                        Height="30"
+                        DockPanel.Dock="Left"
+                        Click="cancelButton_Click">Cancelar</Button>
+            <Button Name="saveButton"
+                        Width="80"
+                        Height="30"
+                        DockPanel.Dock="Right"
+                        Click="saveButton_Click">Guardar</Button>
+        </DockPanel>
+    </StackPanel>
+</mah:MetroWindow>

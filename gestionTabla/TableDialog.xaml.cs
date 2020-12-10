@@ -33,9 +33,6 @@ namespace Bricklin_App.gestionTabla
         {
             InitializeComponent();
 
-            ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
-            ThemeManager.Current.SyncTheme();
-
             SortedDictionary<double, double> data = Model.getInstance().getDataset().getData();
 
             putTableData(data);
@@ -115,8 +112,12 @@ namespace Bricklin_App.gestionTabla
 
             if (result == MessageDialogResult.Negative)
             {
-                Model.getInstance().setDataset(generateDataset());
-                DialogResult = true;
+                Dataset dataset = generateDataset();
+                if (dataset != null)
+                {
+                    Model.getInstance().setDataset(dataset);
+                    DialogResult = true;
+                }
             }
                 
         }
@@ -125,12 +126,33 @@ namespace Bricklin_App.gestionTabla
         {
             SortedDictionary<double, double> sd = new SortedDictionary<double, double>();
 
+            bool foundRepeatedPoints = false;
+
             foreach(CustomPoint c in oc)
             {
-                sd.Add(c.X, c.Y);
+                try
+                {
+                    sd.Add(c.X, c.Y);
+                }
+                catch (ArgumentException ex)
+                {
+                    foundRepeatedPoints = true;
+                    break;
+                }
+            }
+
+            if (foundRepeatedPoints)
+            {
+                showErrorMessage("Dato(s) erroneo(s). Valor no numerico o coordenada X repetida");
+                return null;
             }
 
             return new Dataset(sd);
+        }
+
+        private async void showErrorMessage(String msg)
+        {
+            await this.ShowMessageAsync("Error", msg);
         }
 
         private void generateData_Click(object sender, RoutedEventArgs e)

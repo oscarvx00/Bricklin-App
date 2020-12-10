@@ -1,0 +1,100 @@
+﻿<mah:MetroWindow x:Class="Bricklin_App.gestionVisualizacion.ThemeDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:Bricklin_App.gestionVisualizacion"
+        mc:Ignorable="d"
+        Title="ThemeDialog" Height="500" Width="800"
+        ResizeMode="NoResize">
+    <DockPanel LastChildFill="False">
+        <Grid DockPanel.Dock="Top" Height="150" Width="500" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Width="60" Height="60"
+                       Grid.Column="0" Grid.Row="0"
+                       Fill="Red" Stroke="Gray" StrokeThickness="2"
+                       Name="Red" MouseDown="colorClicked"/>
+            <Rectangle Width="60" Height="60"
+                       Grid.Column="1" Grid.Row="0"
+                       Fill="Violet" Stroke="Gray" StrokeThickness="2"
+                       Name="Violet" MouseDown="colorClicked"/>
+            <Rectangle Width="60" Height="60"
+                       Grid.Column="2" Grid.Row="0"
+                       Fill="Pink" Stroke="Gray" StrokeThickness="2"
+                       Name="Pink" MouseDown="colorClicked"/>
+            <Rectangle Width="60" Height="60"
+                       Grid.Column="3" Grid.Row="0"
+                       Fill="Cyan" Stroke="Gray" StrokeThickness="2"
+                       Name="Cyan" MouseDown="colorClicked"/>
+            <Rectangle Width="60" Height="60"
+                       Grid.Column="4" Grid.Row="0"
+                       Fill="Blue" Stroke="Gray" StrokeThickness="2"
+                       Name="Blue" MouseDown="colorClicked"/>
+
+            <Rectangle Width="60" Height="60"
+                       Grid.Column="0" Grid.Row="1"
+                       Fill="Olive" Stroke="Gray" StrokeThickness="2"
+                       Name="Olive" MouseDown="colorClicked"/>
+            <Rectangle Width="60" Height="60"
+                       Grid.Column="1" Grid.Row="1"
+                       Fill="Green" Stroke="Gray" StrokeThickness="2"
+                       Name="Green" MouseDown="colorClicked"/>
+            <Rectangle Width="60" Height="60"
+                       Grid.Column="2" Grid.Row="1"
+                       Fill="Lime" Stroke="Gray" StrokeThickness="2"
+                       Name="Lime" MouseDown="colorClicked"/>
+            <Rectangle Width="60" Height="60"
+                       Grid.Column="3" Grid.Row="1"
+                       Fill="Orange" Stroke="Gray" StrokeThickness="2"
+                       Name="Orange" MouseDown="colorClicked"/>
+            <Rectangle Width="60" Height="60"
+                       Grid.Column="4" Grid.Row="1"
+                       Fill="Yellow" Stroke="Gray" StrokeThickness="2"
+                       Name="Yellow" MouseDown="colorClicked"/>
+        </Grid>
+
+        <DockPanel DockPanel.Dock="Top" LastChildFill="False" Width="600" Margin="0 0 0 20">
+            <Rectangle Width="280" 
+                       Height="180" 
+                       DockPanel.Dock="Left"
+                       Fill="White"
+                       Stroke="Gray"
+                       Name="Light" MouseDown="themeClicked"/>
+
+            <Rectangle Width="280" 
+                       Height="180" 
+                       DockPanel.Dock="Right"
+                       Fill="Black"
+                       Stroke="Gray"
+                       Name="Dark" MouseDown="themeClicked"/>
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Top"
+                   LastChildFill="False"
+                   Width="700"
+                   Margin="20">
+            <Button Name="cancelButton"
+                        Width="80"
+                        Height="30"
+                        DockPanel.Dock="Left"
+                        Click="cancelButton_Click">Cancelar</Button>
+            <Button Name="saveButton"
+                        Width="80"
+                        Height="30"
+                        DockPanel.Dock="Right"
+                        Click="saveButton_Click">Guardar</Button>
+        </DockPanel>
+    </DockPanel>
+</mah:MetroWindow>

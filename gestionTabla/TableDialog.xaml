@@ -18,7 +18,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <DataGrid Name="dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding}" Width="Auto" HorizontalAlignment="Center" Margin="10">
+        <DataGrid Name="dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding}" Width="Auto" HorizontalAlignment="Center" Margin="10"
+                  CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Eliminar" Click="deleteRowClicked"/>

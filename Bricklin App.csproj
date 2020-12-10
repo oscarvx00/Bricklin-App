@@ -69,6 +69,9 @@
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>packages\ControlzEx.4.4.0\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="Dsafa.WpfColorPicker, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dsafa.WpfColorPicker.1.3.0\lib\net462\Dsafa.WpfColorPicker.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
       <HintPath>packages\MahApps.Metro.2.4.3\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -94,6 +97,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfScreenHelper, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\WpfScreenHelper.0.3.0.0\lib\net40\WpfScreenHelper.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -120,6 +126,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="gestionVisualizacion\BarConfigDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gestionVisualizacion\PolylineConfDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gestionVisualizacion\ThemeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gestionTabla\DataGenerationDialog.xaml.cs">
@@ -127,6 +145,15 @@
     </Compile>
     <Compile Include="gestionTabla\TableDialog.xaml.cs">
       <DependentUpon>TableDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gestionVisualizacion\BarConfigDialog.xaml.cs">
+      <DependentUpon>BarConfigDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gestionVisualizacion\PolylineConfDialog.xaml.cs">
+      <DependentUpon>PolylineConfDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gestionVisualizacion\ThemeDialog.xaml.cs">
+      <DependentUpon>ThemeDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="model\valueObjects\BarConf.cs" />
     <Compile Include="model\valueObjects\Dataset.cs" />
