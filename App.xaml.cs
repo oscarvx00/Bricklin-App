@@ -30,6 +30,13 @@ namespace Bricklin_App
         {
             ThemeManager.Current.ChangeTheme(this, theme + "." + color);
         }
+
+
+        /*public void setSystemTheme()
+        {
+            ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
+            ThemeManager.Current.SyncTheme();
+        }*/
     }
 
 

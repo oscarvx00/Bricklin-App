@@ -26,7 +26,7 @@ namespace Bricklin_App
     public partial class MainWindow : MetroWindow
     {
 
-        Polyline polyline;
+        //Polyline polyline;
 
         SortedDictionary<double, double> actualPolylineData = null;
 
@@ -42,25 +42,15 @@ namespace Bricklin_App
 
             ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
             ThemeManager.Current.SyncTheme();
-
-            polyline = new Polyline();
  
             polylineCanvas.Background = Model.getInstance().getPolylineConf().getBackgroundBrush();
-            polyline.Stroke = Model.getInstance().getPolylineConf().getForegroundBrush();
-            polyline.StrokeThickness = Model.getInstance().getPolylineConf().getStroke();
-
             barCanvas.Background = Model.getInstance().getBarConf().getBackgroundBrush();
-
-
-            polylineCanvas.Children.Add(polyline);
 
             actualPolylineData = Model.getInstance().getDataset().getData();
             actualBarData = Model.getInstance().getDataset().getData();
 
             createPolylineChart();
             createBarChart();
-
-            //ThemeManager.Current.ChangeTheme(this, "Light.Red");
         }
 
         private void editDataClicked(object sender, RoutedEventArgs e)
@@ -118,7 +108,7 @@ namespace Bricklin_App
 
             SortedDictionary<double, double> data = actualPolylineData;
 
-            if (data == null)
+            if (data == null || data.Count == 0)
                 return;
 
             int numPuntos = (int)polylineCanvas.ActualWidth;
@@ -142,7 +132,12 @@ namespace Bricklin_App
             yPantMin = padding;
             yPantMax = polylineCanvas.ActualHeight - padding;*/
 
-            polyline.Points.Clear();
+            Polyline polyline = new Polyline();
+            polyline.Stroke = Brushes.Red;
+            polyline.StrokeThickness = 2;
+
+            polylineCanvas.Children.Clear();
+            polylineCanvas.Children.Add(polylineCanvasSelectionRectangle);
 
             for (int i = 0; i < data.Count; i++)
             {
@@ -158,6 +153,10 @@ namespace Bricklin_App
                 polyline.Points.Add(pt);
             }
 
+            polylineCanvas.Children.Add(polyline);
+
+            setPolylineConf();
+
         }
 
         private void createPolylineChart(Point a , Point b)
@@ -167,7 +166,7 @@ namespace Bricklin_App
 
             SortedDictionary<double, double> data = actualPolylineData;
 
-            if (data == null)
+            if (data == null || data.Count == 0)
                 return;
 
             int numPuntos = (int)polylineCanvas.ActualWidth;
@@ -191,7 +190,9 @@ namespace Bricklin_App
             yPantMin = padding;
             yPantMax = polylineCanvas.ActualHeight - padding;*/
 
-            polyline.Points.Clear();
+            //Polyline polyline = new Polyline();
+            //polyline.Points.Clear();
+            //polylineCanvas.Children.Clear();
 
             SortedDictionary<double, double> newPolylineData = new SortedDictionary<double, double>();
             double xMouseMin = Math.Min(a.X, b.X), xMouseMax = Math.Max(a.X, b.X);
@@ -225,7 +226,7 @@ namespace Bricklin_App
             
             SortedDictionary<double, double> data = actualBarData;
 
-            if (data == null)
+            if (data == null || data.Count == 0)
                 return;
 
             int numPuntos = (int)barCanvas.ActualWidth;
@@ -249,17 +250,17 @@ namespace Bricklin_App
             yPantMin = 0;
             yPantMax = barCanvas.ActualHeight;
 
-            int pointsRange = numPuntos / data.Count;
+            //int pointsRange = numPuntos / data.Count;
 
             List<Line> lineList = new List<Line>();
 
             double ypantallaEjeX = (yPantMin - yPantMax) * (0 - yRealMin) / (yRealMax - yRealMin) + yPantMax;
 
             barCanvas.Children.Clear();
+            barCanvas.Children.Add(barCanvasSelectionRectangle);
 
             for (int i = 0; i < data.Count; i++)
             {
-                //xReal = xRealMin + (i*pointsRange) * (xRealMax - xRealMin) / numPuntos;
                 xReal = data.ElementAt(i).Key;
                 yReal = data.ElementAt(i).Value;
 
@@ -267,8 +268,6 @@ namespace Bricklin_App
                 yPant = (yPantMin - yPantMax) * (yReal - yRealMin) / (yRealMax - yRealMin) + yPantMax;              
 
                 Line line = new Line();
-                line.Stroke = Brushes.Red;
-                line.StrokeThickness = 3;
 
                 line.X1 = xPant;
                 line.Y1 = ypantallaEjeX;
@@ -283,6 +282,8 @@ namespace Bricklin_App
             {
                 barCanvas.Children.Add(l);
             }
+
+            setBarConf();
         }
 
         private void createBarChart(Point a, Point b)
@@ -290,7 +291,7 @@ namespace Bricklin_App
 
             SortedDictionary<double, double> data = actualBarData;
 
-            if (data == null)
+            if (data == null || data.Count == 0)
                 return;
 
             int numPuntos = (int)barCanvas.ActualWidth;
@@ -314,7 +315,7 @@ namespace Bricklin_App
             yPantMin = 0;
             yPantMax = barCanvas.ActualHeight;
 
-            int pointsRange = numPuntos / data.Count;
+            //int pointsRange = numPuntos / data.Count;
 
             List<Line> lineList = new List<Line>();
 
@@ -326,7 +327,6 @@ namespace Bricklin_App
 
             for (int i = 0; i < data.Count; i++)
             {
-                //xReal = xRealMin + (i*pointsRange) * (xRealMax - xRealMin) / numPuntos;
                 xReal = data.ElementAt(i).Key;
                 yReal = data.ElementAt(i).Value;
 
@@ -414,6 +414,65 @@ namespace Bricklin_App
         {
             ThemeDialog themeDialog = new ThemeDialog();
             themeDialog.ShowDialog();
+        }
+
+        /*private void syncThemeClicked(object sender, RoutedEventArgs e)
+        {
+            ((App)Application.Current).setSystemTheme();
+        }*/
+
+        private void configPolylineClicked(object sender, RoutedEventArgs e)
+        {
+            PolylineConfDialog polylineConfDialog = new PolylineConfDialog();
+            polylineConfDialog.ShowDialog();
+
+            if(polylineConfDialog.DialogResult == true)
+            {
+                setPolylineConf();
+            }
+        }
+
+        private void setPolylineConf()
+        {
+            PolylineConf polylineConf = Model.getInstance().getPolylineConf();
+
+            polylineCanvas.Background = polylineConf.getBackgroundBrush();
+
+            foreach (FrameworkElement fe in polylineCanvas.Children)
+            {
+                if (fe.GetType().Equals(typeof(Polyline)))
+                {
+                    ((Polyline)fe).Stroke = polylineConf.getForegroundBrush();
+                    ((Polyline)fe).StrokeThickness = polylineConf.getStroke();
+                }
+            }
+        }
+
+        private void configBarClicked(object sender, RoutedEventArgs e)
+        {
+            BarConfigDialog barConfigDialog = new BarConfigDialog();
+            barConfigDialog.ShowDialog();
+
+            if(barConfigDialog.DialogResult == true)
+            {
+                setBarConf();
+            } 
+        }
+
+        private void setBarConf()
+        {
+            BarConf barConf = Model.getInstance().getBarConf();
+
+            barCanvas.Background = barConf.getBackgroundBrush();
+
+            foreach(FrameworkElement fe in barCanvas.Children)
+            {
+                if (fe.GetType().Equals(typeof(Line)))
+                {
+                    ((Line)fe).Stroke = barConf.getForegroundBrush();
+                    ((Line)fe).StrokeThickness = 2;
+                }
+            }
         }
 
         private void barCanvas_MouseMove(object sender, MouseEventArgs e)

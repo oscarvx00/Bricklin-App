@@ -18,7 +18,11 @@
             </MenuItem>
             <MenuItem Header="_Tema">
                 <MenuItem Header="_Cambiar tema" Click="themeClicked"/>
-                <MenuItem Header="_Sincronizar tema con Windows"/>
+                <!--<MenuItem Header="_Sincronizar tema con Windows" Click="syncThemeClicked"/>-->
+            </MenuItem>
+            <MenuItem Header="_Personalización">
+                <MenuItem Header="Pesonalización polilinea" Click="configPolylineClicked"/>
+                <MenuItem Header="Personalización barras" Click="configBarClicked"/>
             </MenuItem>
         </Menu>
         <Border BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
